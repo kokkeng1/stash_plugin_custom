@@ -20,7 +20,9 @@ jobs:
           fetch-depth: 0
 
       - name: Build site
-        run: ./build_site.sh _site
+        run: |
+          chmod +x build_site.sh
+          ./build_site.sh _site
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
