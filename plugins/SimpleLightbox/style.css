@@ -1,37 +1,26 @@
-/* 이미지 영역이 라이트박스 전체를 차지 */
-.Lightbox-display {
-  flex: 1;
+/* [Gallery tab] Hides the lightbox header and footer to make the image area larger. Mouse reveals them as an overlay to the image*/
+
+.Lightbox-header,
+.Lightbox-footer{
+z-index:9999;
+position:absolute;
+width:100%;
+opacity:0;
+background-color:#0008;
+transition: opacity 0.5s ease;
 }
 
-/* 헤더를 이미지 위 상단에 오버레이 */
-.Lightbox-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1050;
+.Lightbox-footer{
+bottom:0;}
+
+.Lightbox-navbutton{
+opacity:0;
+transition: opacity 0.5s ease;
 }
 
-/* 썸네일 네비게이션 숨기기 */
-.Lightbox-nav {
-  display: none !important;
-}
 
-/* 페이지 번호 (n / n) 숨기기 */
-.Lightbox-header-indicator {
-  display: none !important;
-}
-
-/* 푸터 중앙 이미지 제목/갤러리 링크 숨기기 */
-.Lightbox-footer-center {
-  display: none !important;
-}
-
-/* 푸터를 이미지 위 하단에 오버레이 */
-.Lightbox-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1050;
+.Lightbox-navbutton:hover,
+.Lightbox-header:hover,
+.Lightbox-footer:hover{
+opacity:1;
 }

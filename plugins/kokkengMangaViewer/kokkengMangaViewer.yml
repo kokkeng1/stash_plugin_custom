@@ -1,0 +1,18 @@
+name: kokkengMangaViewer
+description: Manga viewing UX improvements for the Stash lightbox
+version: 0.1.0
+url: https://github.com/kokkeng1/stash_plugin_custom
+
+settings:
+  simpleLightbox:
+    displayName: Simple Lightbox
+    description: Hides header/footer/nav buttons in the lightbox. Reveals them on hover.
+    type: BOOLEAN
+  darkBackground:
+    displayName: Dark Background (10%)
+    description: Reduces the lightbox backdrop opacity to ~8%, making it nearly transparent.
+    type: BOOLEAN
+
+ui:
+  javascript:
+    - main.js
