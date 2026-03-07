@@ -1,0 +1,18 @@
+name: Soft Delete
+description: DB는 유지하고 파일만 삭제하는 옵션을 씬 삭제 다이얼로그에 추가합니다.
+version: 1.0
+
+exec:
+  - python
+  - "{pluginDir}/softDelete.py"
+interface: raw
+
+ui:
+  javascript:
+    - softDelete-ui.js
+
+tasks:
+  - name: 파일만 삭제 (DB 유지)
+    description: 물리 파일만 삭제하고 DB 레코드는 유지합니다.
+    defaultArgs:
+      mode: soft_delete

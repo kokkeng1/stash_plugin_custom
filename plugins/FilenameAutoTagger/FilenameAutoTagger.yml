@@ -1,17 +1,17 @@
 name: FilenameAutoTagger
-description: 파일명 키워드 기반 자동 태그 부여. 새 영상 스캔 시 자동 실행됩니다.
+description: Automatic tagging based on filename keywords. Runs automatically when a new scene is scanned.
 version: "1.0"
 exec:
   - python3
   - "{pluginDir}/FilenameAutoTagger.py"
 interface: raw
 tasks:
-  - name: 전체 영상 태그 적용
-    description: 모든 영상을 대상으로 파일명 기반 태그를 일괄 적용합니다.
+  - name: Apply tags to all scenes
+    description: Apply filename-based tags to all scenes.
     defaultArgs:
       mode: all
 hooks:
-  - name: 스캔 후 자동 태그
-    description: 새 영상 스캔 시 파일명 기반 태그를 자동으로 부여합니다.
+  - name: Auto-tag on new scene scan
+    description: Automatically apply filename-based tags when a new scene is scanned.
     triggeredBy:
       - Scene.Create.Post
