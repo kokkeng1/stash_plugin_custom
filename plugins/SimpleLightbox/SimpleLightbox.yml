@@ -1,0 +1,6 @@
+name: Simple Lightbox
+description: 라이트박스에 불필요한 정보를 지움
+version: 0.1.0
+ui:
+  css:
+    - style.css
