@@ -1,0 +1,8 @@
+name: ClaudeViewer
+description: Open gallery images in a local image viewer (Honeyview) instead of the web Lightbox
+version: 0.1.0
+url: https://github.com/kokkeng1/stash_plugin_custom
+
+ui:
+  javascript:
+    - main.js
