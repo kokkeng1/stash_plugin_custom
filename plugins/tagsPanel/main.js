@@ -188,20 +188,23 @@
   // If no attached tag has children → show all tags.
   // When hierarchyFilter is off → always show all tags.
   function getTagsForPanel(allTags, attachedIds, useHierarchy) {
-    if (!useHierarchy) return allTags;
+    if (!useHierarchy) return { tags: allTags, parentNames: [] };
 
     var attachedParents = allTags.filter(function (t) {
       return attachedIds.has(t.id) && t.child_count > 0;
     });
 
-    if (attachedParents.length === 0) return allTags;
+    if (attachedParents.length === 0) return { tags: allTags, parentNames: [] };
 
     var childIds = new Set();
     attachedParents.forEach(function (parent) {
       (parent.children || []).forEach(function (c) { childIds.add(c.id); });
     });
 
-    return allTags.filter(function (t) { return childIds.has(t.id); });
+    return {
+      tags: allTags.filter(function (t) { return childIds.has(t.id); }),
+      parentNames: attachedParents.map(function (p) { return p.name; }),
+    };
   }
 
   async function ensureTagSet(entityType, entityId) {
@@ -234,7 +237,7 @@
   // ── Tag Panel UI ──────────────────────────────────────────────────────────
 
   function setBadgeAttached(badge, attached) {
-    badge.style.opacity = attached ? "1" : "0.25";
+    badge.style.opacity = attached ? "1" : "0.3";
     badge.style.fontWeight = attached ? "600" : "normal";
   }
 
@@ -268,12 +271,13 @@
     }
   }
 
-  function buildTagPanel(entityType, entityId, tags, panelId) {
+  function buildTagPanel(entityType, entityId, tags, panelId, parentNames) {
     var panel = document.createElement("div");
     panel.id = panelId;
 
     var h6 = document.createElement("h6");
-    h6.textContent = "Tags (" + tags.length + ")";
+    var postfix = parentNames && parentNames.length > 0 ? " in " + parentNames.join(", ") : "";
+    h6.textContent = "Tags" + postfix + " (" + tags.length + ")";
     panel.appendChild(h6);
 
     var list = document.createElement("div");
@@ -328,7 +332,9 @@
     if (!currentEntity || currentEntity.type !== entityType || currentEntity.id !== entityId) return false;
     if (document.getElementById(PANEL_DETAIL_ID)) return true;
 
-    var tags = getTagsForPanel(allTags, panelTagSet, cfg.hierarchyFilter);
+    var result = getTagsForPanel(allTags, panelTagSet, cfg.hierarchyFilter);
+    var tags = result.tags;
+    var parentNames = result.parentNames;
 
     var firstBadge = container.querySelector(".tag-item.tag-link");
     var tagsH6 =
@@ -338,7 +344,7 @@
         ? firstBadge.previousElementSibling
         : null;
 
-    var panel = buildTagPanel(entityType, entityId, tags, PANEL_DETAIL_ID);
+    var panel = buildTagPanel(entityType, entityId, tags, PANEL_DETAIL_ID, parentNames);
 
     if (tagsH6) {
       container.insertBefore(panel, tagsH6);
@@ -388,9 +394,11 @@
     if (!currentEntity || currentEntity.type !== entityType || currentEntity.id !== entityId) return false;
     if (document.getElementById(PANEL_EDIT_ID)) return true;
 
-    var tags = getTagsForPanel(allTags, panelTagSet, cfg.hierarchyFilter);
+    var result = getTagsForPanel(allTags, panelTagSet, cfg.hierarchyFilter);
+    var tags = result.tags;
+    var parentNames = result.parentNames;
 
-    var panel = buildTagPanel(entityType, entityId, tags, PANEL_EDIT_ID);
+    var panel = buildTagPanel(entityType, entityId, tags, PANEL_EDIT_ID, parentNames);
     formGroup.parentNode.insertBefore(panel, formGroup.nextSibling);
     return true;
   }
@@ -460,16 +468,6 @@
     }
   });
   navWatcher.observe(document.body, { childList: true, subtree: true });
-
-  setInterval(function () {
-    if (!currentEntity) return;
-    if (!injectingDetail && !document.getElementById(PANEL_DETAIL_ID)) {
-      tryInjectDetailPanel();
-    }
-    if (!injectingEdit && !document.getElementById(PANEL_EDIT_ID)) {
-      tryInjectEditPanel();
-    }
-  }, 500);
 
   // ── Init ──────────────────────────────────────────────────────────────────
 

@@ -5,12 +5,12 @@ url: https://github.com/kokkeng1/stash_plugin_custom
 
 settings:
   detailPanel:
-    displayName: Detail Panel
-    description: Show the tag panel in the read-only detail tab. When off, only the edit tab gets the tag panel.
+    displayName: Show in Detail Panel
+    description: Switch from tag labels to togglable tag panels.
     type: BOOLEAN
   hierarchyFilter:
-    displayName: Hierarchy Filter
-    description: If an attached tag has child tags, show only those child tags in the panel. Useful for category-based tagging (e.g. attaching a "Clip" category shows only clip sub-types).
+    displayName: Show Child Tags Only
+    description: If an attached tag has child tags, show only those child tags in the panel.
     type: BOOLEAN
 
 ui:
