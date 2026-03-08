@@ -7,7 +7,7 @@ Custom Stash plugins by kokkeng1.
 Add this repository as a plugin source in [Stash](https://stashapp.cc):
 
 ```
-https://kokkeng1.github.io/stash_plugin_custom/main/index.yml
+https://kokkeng1.github.io/stash_plugin_custom/index.yml
 ```
 
 **Settings → Plugins → Add Source**
