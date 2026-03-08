@@ -1,0 +1,18 @@
+name: Tags Panel
+description: Replaces the tag display with an interactive badge panel on Scene, Gallery, and Image pages. Attached tags are bright; unattached are dim. Click to toggle instantly.
+version: 0.1.0
+url: https://github.com/kokkeng1/stash_plugin_custom
+
+settings:
+  detailPanel:
+    displayName: Detail Panel
+    description: Show the tag panel in the read-only detail tab. When off, only the edit tab gets the tag panel.
+    type: BOOLEAN
+  hierarchyFilter:
+    displayName: Hierarchy Filter
+    description: If an attached tag has child tags, show only those child tags in the panel. Useful for category-based tagging (e.g. attaching a "Clip" category shows only clip sub-types).
+    type: BOOLEAN
+
+ui:
+  javascript:
+    - main.js
