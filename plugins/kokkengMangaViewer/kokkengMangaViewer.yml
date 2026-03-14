@@ -1,6 +1,6 @@
-name: kokkengMangaViewer
-description: Manga viewing UX improvements for the Stash lightbox
-version: 0.1.0
+name: Manga Utilities
+description: Manga viewing UX improvements
+version: 1.1.0
 url: https://github.com/kokkeng1/stash_plugin_custom
 
 settings:
@@ -9,8 +9,20 @@ settings:
     description: Hides header/footer/nav buttons in the lightbox. Reveals them on hover.
     type: BOOLEAN
   darkBackground:
-    displayName: Dark Background (10%)
-    description: Reduces the lightbox backdrop opacity to ~8%, making it nearly transparent.
+    displayName: Darker Background
+    description: Reduces the lightbox transparency.
+    type: BOOLEAN
+  galleryFillThumbnail:
+    displayName: Fill Thumbnails
+    description: Makes gallery thumbnails fill the card width (object-fit cover), removing empty left/right space.
+    type: BOOLEAN
+  galleryThumbnailRatio:
+    displayName: Gallery Thumbnail Ratio
+    description: "Aspect ratio for gallery thumbnails (e.g. 4 / 5). Only used when Gallery Fill Thumbnail is enabled."
+    type: STRING
+  lightboxScrollMode:
+    displayName: Lightbox Scroll Mode
+    description: Converts the lightbox into a vertical scroll view. All images are loaded and stacked vertically. Header/footer overlay remains visible.
     type: BOOLEAN
 
 ui:
